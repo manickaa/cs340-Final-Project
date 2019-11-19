@@ -1,0 +1,97 @@
+body, html {
+  height: 100%;
+}
+.bg { 
+  background-image: url("./image3.png"); 
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 80%;
+}
+.nav-item{
+	font-size: 1.25rem;
+	color: black;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1.5rem;
+    padding-left: 0.5rem;
+}
+.navbar-brand {
+    color:black;
+}
+.form, .form-group row {
+	text-align: left;
+	color: black;
+	padding: 2%;
+	text-align: left;
+} 
+#customer-page {
+	padding-top: 3%;
+	padding-bottom: 9%;
+	padding-left: 2%;
+	padding-right:2%;
+}
+#admin-page {
+	padding-top: 3%;
+	padding-bottom: 15%;
+	padding-left: 2%;
+	padding-right:2%;
+}
+.sign-up {
+	padding-top : 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border: 2pt;
+	border-style: groove;
+	border-color: grey;
+	width:30%;
+	background-color: grey;
+}
+#link {
+	color : white;
+}
+#title {
+	font-size: 10px;
+}
+ul {
+list-style-type: none;
+}
+
+li[id="menuItem"] {
+    float: left;
+}
+
+li a[id="menuLink"] {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px 16px;
+    text-decoration: none;
+    background-color: inherit;
+}
+th, td {
+	color: white;
+}
+#intro {
+	color: white;
+	font-size: 3rem;
+	font-style: italic;
+	padding-left: 20%;
+	padding-bottom: 1%;
+	padding-top: 5%;
+}
+#description {
+    color: white;
+    font-size: 1rem;
+    font-weight:bold;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+#description_content {
+    color: white;
+    font-size: 1rem;
+    padding-left: 5%;
+    padding-right: 5%;
+}
