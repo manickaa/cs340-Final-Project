@@ -1,0 +1,30 @@
+<div class="admin-page">
+    <div class = "form">
+        <form id="add-payment" action="/payment" method="post">
+            <fieldset>
+                <legend>Add Payment</legend>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="booking_ID" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Payment Description</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="payment_description" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Payment Date</label>
+                    <div class="col-6">
+                    <input type="date" class="form-control" name="payment_date" placeholder="24/10/2019" required >
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark" id="submitInfo">
+                    Pay
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="admin-page">
+    <div class = "form">
+        <form method="get">
+            <fieldset>
+                <legend>Manage Ratings</legend>
+                <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Rating</label>
+                        <div class="col-6">
+                            <select id="select-rating" size="1" class="form-control" name="select-rating">
+                                <option value="blank"></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Location</label>
+                        <div class="col-6">
+                            <select id="select-location" size="1" class="form-control" name="select-location">
+                                {{#each locations}}
+                                    <option value="{{id}}">{{location}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                </div>
+                <button type="submit" class="btn btn-dark" id="submitInfo">Search</button>
+                <button type="button" class="btn btn-dark" id="submitInfo">
+                    <a href="/add-rating" id="link">Add </a>
+                </button>
+            </fieldset>
+        </form>
+    </div>
+    <br />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">Rating ID#</th>
+            <th scope="col">Travel Location ID#</th>
+            <th scope="col">Travel Location</th>
+            <th scope="col">Customer ID#</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Review</th>
+        </tr>   
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">{{rating_ID}}</th>
+                <td>{{travelLocation_ID}}</td>
+                <td>{{city}}</td>
+                <td>{{customer_ID</td>
+                <td>{{first_name}}</td>
+                <td>{{rating}}</td>
+                <td>{{review}}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>    
+</div>

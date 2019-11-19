@@ -1,0 +1,57 @@
+<div class="admin-page">
+    <div class = "form">
+        <form method="get">
+            <fieldset>
+                <legend>Manage Payment</legend>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Payment ID</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="payment_ID" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="booking_ID" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Payment Date</label>
+                    <div class="col-6">
+                    <input type="date" class="form-control" name="payment_date" placeholder="24/10/2019" required >
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark" id="submitInfo">Search</button>
+                <button type="button" class="btn btn-dark" id="submitInfo">
+                    <a href="/add-payment" id="link">Add Payment</a>
+                </button>
+            </fieldset>
+        </form>
+    </div>
+    <br />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">Payment ID#</th>
+            <th scope="col">Booking ID#</th>
+            <th scope="col">Payment Amount</th>
+            <th scope="col">Payment Date</th>
+            <th scope="col">Payment Description</th>
+            <th scope="col">Delete</th>
+        </tr>   
+        </thead>
+        <tbody>
+            {{#each payment}}
+            <tr>
+                <th scope="row">{{payment_ID}}</th>
+                <td>{{booking_ID}}</td>
+                <td>{{payment_amount}}</td>
+                <td>{{payment_date}}</td>
+                <td>{{payment_description}}</td>
+                <td><button type="button" class="btn btn-dark">Delete</button></td>
+            </tr>
+            {{each}}
+        </tbody>
+    </table>
+</div>    
