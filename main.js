@@ -34,7 +34,7 @@ app.use(express.static('public'));
   });
 }*/
 
-function getCustomers(res, mysql, context, done){
+function getCustomer(res, mysql, context, done){
   var sql_query = "SELECT customers.customer_ID as customer_ID, customers.first_name as first_name, customers.middle_name as middle_name, customers.last_name as last_name,customers.street_no as street_no, customers.city as city, customers.state as state, customers.country as country,customers.phone_number as phone_number, customers.email_id as email_id, COUNT(bookings.booking_ID) AS numberofbookings,COUNT(ratings.rating_ID) AS numberofreviews FROM customers LEFT JOIN bookings ON customers.customer_ID = bookings.customer_ID LEFT JOIN ratings ON customers.customer_ID = ratings.rating_ID GROUP BY customers.customer_ID ORDER BY customers.customer_ID;";
   mysql.pool.query(sql_query, function(err, result, fields){
       if(err){
@@ -48,7 +48,7 @@ function getCustomers(res, mysql, context, done){
   });
 }
 
-function getBookings(res, mysql, context, complete){
+function getBooking(res, mysql, context, complete){
   var sql_query = "SELECT bookings.booking_ID as booking_ID, bookings.booking_date as booking_date, bookings.departure_date as departure_date, bookings.arrival_date as arrival_date, bookings.number_adults as number_adults, bookings.number_children as number_children, bookings.travelLocation_ID as travelLocation_ID, bookings.customer_ID as customer_ID FROM bookings LEFT JOIN travel_location ON bookings.travelLocation_ID = travel_location.travelLocation_ID LEFT JOIN customers ON bookings.customer_ID = customers.customer_ID GROUP BY bookings.booking_ID ORDER BY bookings.booking_ID;";
   mysql.pool.query(sql_query, function(err, result, fields){
       if(err){
@@ -171,10 +171,23 @@ app.get('/add-rating', function(req, res, next){
   }
 });
 
+app.get('/add-customer', function(req, res) {
+  res.render('add-customer.handlebars')
+});
+app.get('/add-booking', function(req, res) {
+  res.render('add-booking.handlebars');
+});
+app.get('/add-payment', function(req, res) {
+  res.render('add-payment.handlebars');
+});
+app.get('/add-rating', function(req,res) {
+  res.render('add-rating.handlebars');
+});
+
 app.post('/add-customer', function(req, res, next) {
   console.log(req.body)
   var mysql = req.app.get('mysql');
-  var sql = "INSERT INTO customer (first_name, last_name, middle_name, street_no, city, state, country, postal_code, phone_number, email_id, passport_number, passport_countryofissue, passport_expirydate) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+  var sql = "INSERT INTO customer (first_name, last_name, middle_name, street_no, city, state, country, postal_code, phone_number, email_id, passport_number, passport_countryofissue, passport_expirydate) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
   var inserts = [req.body.first_name, req.body.last_name, req.body.middle_name, req.body.street_no, req.body.city, req.body.state, req.body.country, req.body.postal_code, req.body.phone_number, req.body.email_id, req.body.passport_number, req.body.passport_countryofissue, req.body.passport_expirydate];
   sql = mysql.pool.query(sql,inserts,function(err, result, fields){
       if(err){
