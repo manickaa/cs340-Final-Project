@@ -8,8 +8,8 @@
                     <div class="col-6">
                         <select name="booking_id" size="1" class="form-control" id="booking_id">
                             <!--TO DO add blank space-->
-                            {{#each booking}}
-                            <option value="{{booking_id}}">{{booking_id}}</option>
+                            {{#each booking_display}}
+                            <option value="{{booking_ID}}">{{booking_ID}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-dark" id="submitInfo">Search</button>
-                <a href="assignment_add.html" class="btn btn-dark" id="submitInfo">Add New Assignment</a>
+                <a href="/add-assignment" class="btn btn-dark" id="submitInfo">Add New Assignment</a>
 
             </fieldset>
         </form>
@@ -60,19 +60,19 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each assignment}}
+                {{#each assignments}}
                 <tr>
                     <td>{{assignment_ID}}</td>
                     <td>{{booking_ID}}</td>
-                    <td>{{guide_name}}</td>
-                    <td>{{location}}</td>
-                    <td>{{customer_name}}</td>
+                    <td>{{guide}}</td>
+                    <td>{{destination}}</td>
+                    <td>{{customer}}</td>
                     <td>{{departure_date}}</td>
                     <td>{{arrival_date}}</td>
-                    <td>{{adults}}</td>
-                    <td>{{children}}</td>
+                    <td>{{count_adults}}</td>
+                    <td>{{count_kids}}</td>
                     <td><button type="button" class="btn btn-dark">Delete</button></td>
-                    <td><a href="assignment_edit.html" class="btn btn-dark">Edit</a></td>
+                    <td><a href="/update-assignments" class="btn btn-dark">Edit</a></td>
                 </tr>
                 {{/each}}
             </tbody>

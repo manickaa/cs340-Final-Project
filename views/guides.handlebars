@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-dark" value="filter" name="search_guide" id="search_guide" onclick="filterGuide()">Search</button>
-                <a href="/guide-add" class="btn btn-dark" id="submitInfo">Add New Tour Guide</a>
+                <a href="/add-guide" class="btn btn-dark" id="submitInfo">Add New Tour Guide</a>
             </fieldset>
         </form>
     </div>
@@ -32,11 +32,12 @@
             <tbody>
                 {{#each tour_guide}}
                 <tr>
-                    <th scope="row">{{id}}</th>
+                    <th scope="row">{{guide_ID}}</th>
                     <td>{{first_name}}</td>
                     <td>{{last_name}}</td>
                     <td>{{count_assignments}}</td>
                     <td>{{count_locations}}</td>
+                    <td><a href="/update-guide" class="btn btn-dark">Edit</a></td>
                 </tr>
                 {{/each}}
             </tbody>
