@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
+<body>
+    <div class="bg">
+        <div class="admin-page">
+            <div class="form">
+                <form method="get">
+                    <fieldset>
+                        <legend>Manage Locations</legend>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <select name="location_filter" size="1" class="form-control" id="location_filter">
+                                    {{#each location_display}}
+                                    <option value="{{location_id}}">{{location_name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-dark" value="filter" name="search_location" id="search_location" onclick="filterLocation()">Search</button>
+                        <a href="/location_add" class="btn btn-dark" id="submitInfo">Add New Location</a>
+                    </fieldset>
+                </form>
+            </div>
+            <div id="customer-page">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Location ID#</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Country</th>
+                            <th scope="col"># Bookings</th>
+                            <th scope="col"># Tour Guides</th>
+                            <th scope="col"># Adults + Kids</th>
+                            <th scope="col">Average Review</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each location}}
+                        <tr>
+                            <th scope="row">{{location_ID}}</th>
+                            <td>{{city}}</td>
+                            <td>{{country}}</td>
+                            <td>{{count_bookings}}</td>
+                            <td>{{count_guides}}</td>
+                            <td>{{adults_kids}}</td>
+                            <td>{{ave_review}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
