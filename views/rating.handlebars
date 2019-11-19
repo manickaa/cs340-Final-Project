@@ -48,6 +48,7 @@
         </tr>   
         </thead>
         <tbody>
+            {{#each rating}}
             <tr>
                 <th scope="row">{{rating_ID}}</th>
                 <td>{{travelLocation_ID}}</td>
@@ -57,6 +58,7 @@
                 <td>{{rating}}</td>
                 <td>{{review}}</td>
             </tr>
+            {{/each}}
         </tbody>
     </table>
     </div>    
