@@ -1,0 +1,30 @@
+<div class="admin-page">
+    <div class="form">
+        <form method="get" action="">
+            <fieldset>
+                <legend>Update Assignment:</legend>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
+                    <div class="col-6">
+                        <select name="assign_id" size="1" class="form-control" id="guide_name" required>
+                            {{#each booking}}
+                            <option value="{{booking_id}}">{{booking_id}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Tour Guide</label>
+                    <div class="col-6">
+                        <select name="guide_name" size="1" class="form-control" id="guide_name" required>
+                            {{#each guide_display}}
+                            <option value="{{guide_id}}">{{guide_full_name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark" id="submitInfo">Update</button>
+            </fieldset>
+        </form>
+    </div>
+</div>

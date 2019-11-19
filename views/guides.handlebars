@@ -1,0 +1,45 @@
+<div class="admin-page">
+    <div class="form">
+        <form method="get">
+            <fieldset>
+                <legend>Manage Tour Guides</legend>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <select name="guide_filter" size="1" class="form-control" id="guide_filter">
+                            {{#each guide_display}}
+                            <option value="{{id}}">{{guide_full_name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark" value="filter" name="search_guide" id="search_guide" onclick="filterGuide()">Search</button>
+                <a href="/guide-add" class="btn btn-dark" id="submitInfo">Add New Tour Guide</a>
+            </fieldset>
+        </form>
+    </div>
+    <div id="customer-page">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Tour Guide ID#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col"># Assignments</th>
+                    <th scope="col"># Locations</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each tour_guide}}
+                <tr>
+                    <th scope="row">{{id}}</th>
+                    <td>{{first_name}}</td>
+                    <td>{{last_name}}</td>
+                    <td>{{count_assignments}}</td>
+                    <td>{{count_locations}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

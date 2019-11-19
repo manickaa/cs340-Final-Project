@@ -1,0 +1,23 @@
+<div class="admin-page">
+    <div class="form">
+        <form id="add-location" method="post">
+            <fieldset>
+                <legend>Add New Travel Location:</legend>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">City</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="location_city" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Country</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" id="location_country" required>
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-dark" name="add_location" id="add_location">Add<>
+                <a href="/locations" class="btn btn-dark" id="submitInfo">Return to Manage Locations</a>
+            </fieldset>
+        </form>
+    </div>
+</div>
