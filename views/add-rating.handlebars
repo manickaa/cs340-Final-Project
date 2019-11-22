@@ -1,6 +1,6 @@
 <div class="admin-page">
     <div class = "form">
-        <form method="get">
+        <form id="add-rating" action"/add-rating" method="get">
             <fieldset>
                 <legend>Add Ratings</legend>
                 <div class="form-group row">
@@ -12,7 +12,7 @@
                 <div class="form-group row">
                         <label for="formGroupExampleInput" class="col-2 col-form-label">Rating</label>
                         <div class="col-6">
-                            <select id="select-rating" size="1" class="form-control" name="select-rating">
+                            <select id="select_rating" size="1" class="form-control" name="select-rating">
                                 <option value="blank"></option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -25,7 +25,7 @@
                 <div class="form-group row">
                         <label for="formGroupExampleInput" class="col-2 col-form-label">Location</label>
                         <div class="col-6">
-                            <select id="select-location" size="1" class="form-control" name="select-location">
+                            <select id="select_location" size="1" class="form-control" name="select-location">
                                 {{#each locations}}
                                     <option value="{{id}}">{{location}}</option>
                                 {{/each}}
