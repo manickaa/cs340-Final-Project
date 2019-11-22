@@ -1,14 +1,14 @@
 <div class="admin-page">
     <div class="form">
-        <form method="get">
+        <form id="add-assignment" action="/add-assignment" method="post">
             <fieldset>
                 <legend>Add New Assignment:</legend>
                 <div class="form-group row">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID#</label>
                     <div class="col-6">
-                        <select name="assign_id" size="1" class="form-control" id="guide_name" required>
-                            {{#each assignment}}
-                            <option value="{{id}}">{{id}}</option>
+                        <select name="booking" size="1" class="form-control" id="booking" required>
+                            {{#each booking_display}}
+                            <option value="{{booking_ID}}">{{booking_ID}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -16,8 +16,8 @@
                 <div class="form-group row">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Tour Guide</label>
                     <div class="col-6">
-                        <select name="guide_name" size="1" class="form-control" id="guide_name" required>
-                            {{#each tour_guide}}
+                        <select name="tour_guide" size="1" class="form-control" id="tour_guide" required>
+                            {{#each guide_display}}
                             <option value="{{guide_ID}}">{{guide_full_name}}</option>
                             {{/each}}
                         </select>

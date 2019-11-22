@@ -86,7 +86,7 @@ function getLocation(res, mysql, context, complete) {
     });
 }
 function getGuideDisplay(res, mysql, context, complete) {
-    mysql.pool.query("SELECT tour_guide.tourGuide_ID as guide_ID, CONCAT(tour_guide.first_name, ' ', tour_guide.last_name) as guide_full_name FROM tour_guide",
+    mysql.pool.query("SELECT tour_guide.tourGuide_ID as guide_ID, CONCAT(tour_guide.first_name, ' ', tour_guide.last_name) as guide_full_name FROM tour_guide ORDER BY guide_full_name",
         function (error, results, fields) {
             if (error) {
                 res.write(JSON.stringify(error));
@@ -115,7 +115,6 @@ function getGuides(res, mysql, context, complete) {
             res.end();
         }
         context.tour_guide = result;
-        console.log(context.tour_guide);
         complete();
     });
 }
@@ -216,6 +215,116 @@ function selectLocation(res, mysql, context, complete) {
   });
 }
 
+function deleteAssignment(id){
+    $.ajax({
+        url: '/assignments/' + id,
+        type: 'DELETE',
+        success: function(result){
+            window.location.reload(true);
+        }
+    })
+};
+
+function getGuideUpdate(res, mysql, context, guide_ID, complete) {
+    var sql = "SELECT tourGUide_ID as guide_ID, first_Name AS first_name, last_Name AS last_name FROM tour_guide WHERE tourGuide_ID = ?";
+    var inserts = [guide_ID];
+    mysql.pool.query(sql, inserts, function (error, results, fields) {
+        if (error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        context.guide = results[0];
+        complete();
+    });
+}
+
+function updateGuide(id) {
+    $.ajax({
+        url: '/guides/' + id,
+        type: 'PUT',
+        data: $('#update-guide').serialize(),
+        success: function (result) {
+            window.location.replace("./guides");
+        }
+    })
+};
+
+/*TO DO INCOMPLETE*/
+app.put('/guides/:id', function (req, res) {
+    var mysql = req.app.get('mysql');
+    console.log(req.body)
+    console.log(req.params.id)
+    var sql = "UPDATE tour_guide SET first_Name=?, last_Name=? WHERE tourGuide_ID=?";
+    var inserts = [req.body.first_name, req.body.last_name, req.params.guide_ID];
+    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error)
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            res.status(200);
+            res.end();
+        }
+    });
+});
+
+/*TO DO INCOMPLETE*/
+app.get('/guides/:id', function (req, res) {
+    callbackCount = 0;
+    var context = {};
+    var mysql = req.app.get('mysql');
+    getGuideUpdate(res, mysql, context, req.params.guide_ID, complete);
+    function complete() {
+        callbackCount++;
+        if (callbackCount >= 1) {
+            res.render('update-guide', context);
+        }
+    }
+});
+
+function getOneGuide(req, res, mysql, context, complete) {
+    var sql_query = "SELECT tour_guide.tourGuide_ID as guide_ID, tour_guide.first_Name as first_name, tour_guide.last_Name as last_name, " +
+                    "COUNT(assignment.tourGuide_travelLocation) AS count_assignments, " +
+                    "COUNT(travel_location.travelLocation_ID) AS count_locations " +
+                    "FROM tour_guide " +
+                    "WHERE tour_guide.tourGuide_ID = ?" +
+                    "LEFT JOIN assignment ON tour_guide.tourGuide_ID = assignment.tourGuide_ID " +
+                    "LEFT JOIN travel_location ON assignment.travelLocation_ID = travel_location.travelLocation_ID";
+    console.log(req.params)
+    var inserts = [req.params.guide_ID]
+    mysql.pool.query(sql_query, inserts, function (error, results, fields) {
+        if (error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        context.tour_guide = results;
+        console.log(context.tour_guide);
+        complete();
+    });
+}
+
+function filterGuide() {
+    //get the id of the selected homeworld from the filter dropdown
+    var id = document.getElementById('guide_filter').value
+    //construct the URL and redirect to it
+    window.location = '/guides/filter/' + parseInt(id)
+}
+
+/*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
+app.get('/guides/filter/:id', function (req, res) {
+    var callbackCount = 0;
+    var context = {};
+    var mysql = req.app.get('mysql');
+    getOneGuide(req, res, mysql, context, complete);
+    getGuideDisplay(res, mysql, context, complete);
+    function complete() {
+        callbackCount++;
+        if (callbackCount >= 2) {
+            res.render('guides', context);
+        }
+    }
+});
+
 app.get('/', function(req, res, next){
   // Render the homepage.
   res.render('home');
@@ -225,8 +334,6 @@ app.get('/home', function(req, res, next){
   // Render the homepage.
   res.render('home.handlebars');
 });
-
-
 
 app.get('/guides', function (req, res) {
     var callbackCount = 0;
@@ -241,15 +348,6 @@ app.get('/guides', function (req, res) {
         }
     }
 });
-
-app.get('/add-guide', function (req, res) {
-    res.render('guide-add')
-});
-
-app.get('/update-guide', function (req, res) {
-    res.render('guide-update')
-});
-
 
 app.get('/assignments', function (req, res) {
     var callbackCount = 0;
@@ -267,15 +365,6 @@ app.get('/assignments', function (req, res) {
     }
 });
 
-app.get('/update-assignments', function (req, res) {
-    res.render('assignment-update')
-});
-
-
-app.get('/add-assignment', function (req, res) {
-    res.render('assignment-add')
-});
-
 app.get('/locations', function (req, res) {
     var callbackCount = 0;
     var context = {};
@@ -289,10 +378,6 @@ app.get('/locations', function (req, res) {
         }
     }
 });
-app.get('/add-location', function (req, res) {
-    res.render('location-add')
-});
-
 
 app.get('/customer', function (req, res, next) {
     var callbackCount = 0;
@@ -305,22 +390,6 @@ app.get('/customer', function (req, res, next) {
             res.render('customer', context);
         }
     }
-});
-
-app.get('/add-customer', function(req, res) {
-  res.render('add-customer.handlebars')
-});
-
-app.get('/add-booking', function(req, res) {
-  res.render('add-booking.handlebars');
-});
-
-app.get('/add-payment', function(req, res) {
-  res.render('add-payment.handlebars');
-});
-
-app.get('/add-rating', function(req,res) {
-  res.render('add-rating.handlebars');
 });
 
 app.get('/customer', function(req, res, next){
@@ -362,17 +431,55 @@ app.get('/payment', function(req, res, next){
   }
 });
 
-app.get('/rating', function(req, res, next){
-  var callbackCount = 0;
-  var context = {};
-  var mysql = req.app.get('mysql');
-  getRating(res, mysql, context, complete);
-  function complete(){
-    callbackCount++;
-    if(callbackCount >= 1){
-      res.render('rating', context);
+app.get('/rating', function (req, res, next) {
+    var callbackCount = 0;
+    var context = {};
+    var mysql = req.app.get('mysql');
+    getRating(res, mysql, context, complete);
+    function complete() {
+        callbackCount++;
+        if (callbackCount >= 1) {
+            res.render('rating', context);
+        }
     }
-  }
+});
+
+app.get('/add-customer', function (req, res) {
+    res.render('add-customer.handlebars')
+});
+
+app.get('/add-booking', function (req, res) {
+    res.render('add-booking.handlebars');
+});
+
+app.get('/add-payment', function (req, res) {
+    res.render('add-payment.handlebars');
+});
+
+app.get('/add-rating', function (req, res) {
+    res.render('add-rating.handlebars');
+});
+
+app.get('/add-guide', function (req, res) {
+    res.render('add-guide');
+});
+
+app.get('/add-location', function (req, res) {
+    res.render('add-location');
+});
+
+app.get('/add-assignment', function (req, res) {
+    var callbackCount = 0;
+    var context = {};
+    var mysql = req.app.get('mysql');
+    getBookingID(res, mysql, context, complete);
+    getGuideDisplay(res, mysql, context, complete);
+    function complete() {
+        callbackCount++;
+        if (callbackCount >= 2) {
+            res.render('add-assignment', context);
+        }
+    }
 });
 
 app.get('/add-rating', function(req, res, next){
@@ -439,7 +546,6 @@ app.post('/add-payment', function(req, res, next){
 app.post('/add-rating', function(req, res, next){
   console.log(req.body)
   var mysql = req.app.get('mysql');
-
   var sql = "INSERT INTO ratings(customer_ID, travelLocation_ID, rating, review) VALUES(?, (SELECT travelLocation_ID FROM travel_location WHERE city = ?),?,?);";
   var inserts = [req.body.customer_ID, req.body.select-location, req.body.select-rating, req.body.review];
   sql = mysql.pool.query(sql,inserts,function(err, result, fields){
@@ -451,6 +557,78 @@ app.post('/add-rating', function(req, res, next){
           res.redirect('/rating');
       }
   });
+});
+
+app.post('/add-guide', function (req, res, next) {
+    console.log(req.body)
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO tour_guide(first_name, last_name) VALUES(?,?);";
+    var inserts = [req.body.first_name, req.body.last_name];
+    sql = mysql.pool.query(sql, inserts, function (err, result, fields) {
+        if (err) {
+            console.log(JSON.stringify(err))
+            res.write(JSON.stringify(err));
+            res.end();
+        } else {
+            res.redirect('/guides');
+        }
+    });
+});
+
+app.post('/add-location', function (req, res, next) {
+    console.log(req.body)
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO travel_location (city, country) VALUES(?,?);";
+    var inserts = [req.body.city, req.body.country];
+    sql = mysql.pool.query(sql, inserts, function (err, result, fields) {
+        if (err) {
+            console.log(JSON.stringify(err))
+            res.write(JSON.stringify(err));
+            res.end();
+        } else {
+            res.redirect('/locations');
+        }
+    });
+});
+
+app.post('/add-assignment', function (req, res, next) {
+    console.log(req.body)
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO assignment (booking_ID, travelLocation_ID, tourGuide_ID) " +
+                "VALUES(?, (SELECT bookings.travelLocation_ID FROM bookings WHERE booking_ID=?),?);";
+    var inserts = [req.body.booking, req.body.booking, req.body.tour_guide];
+    sql = mysql.pool.query(sql, inserts, function (err, result, fields) {
+        if (err) {
+            console.log(JSON.stringify(err))
+            res.write(JSON.stringify(err));
+            res.end();
+        } else {
+            res.redirect('/assignments');
+        }
+    });
+});
+
+/*TO DO INCOMPLETE*/
+app.delete('/assignments/:id', function (req, res) {
+    var mysql = req.app.get('mysql');
+    var sql = "DELETE FROM assignment WHERE tourGuide_travelLocation = ?";
+    var inserts = [req.params.assignment_ID];
+    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error)
+            res.write(JSON.stringify(error));
+            res.status(400);
+            res.end();
+        } else {
+            res.status(202).end();
+        }
+    })
+})
+
+
+
+app.get('/update-assignments', function (req, res) {
+    res.render('update-assignment')
 });
 
 app.listen(app.get('port'), function(){

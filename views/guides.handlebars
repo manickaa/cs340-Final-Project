@@ -1,18 +1,19 @@
 <div class="admin-page">
     <div class="form">
-        <form method="get">
+        <form ud='filter_guide' action='' method=''>
             <fieldset>
                 <legend>Manage Tour Guides</legend>
                 <div class="form-group row">
                     <div class="col-6">
                         <select name="guide_filter" size="1" class="form-control" id="guide_filter">
                             {{#each guide_display}}
-                            <option value="{{id}}">{{guide_full_name}}</option>
+                            <option value="{{guide_ID}}">{{guide_full_name}}</option>
                             {{/each}}
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark" value="filter" name="search_guide" id="search_guide" onclick="filterGuide()">Search</button>
+                <button type="submit" class="btn btn-dark" value="Filter" onclick="filterGuide()">Search</button>
+                <a href="/guides" class="btn btn-dark" id="submitInfo">Clear</a>
                 <a href="/add-guide" class="btn btn-dark" id="submitInfo">Add New Tour Guide</a>
             </fieldset>
         </form>
@@ -37,7 +38,7 @@
                     <td>{{last_name}}</td>
                     <td>{{count_assignments}}</td>
                     <td>{{count_locations}}</td>
-                    <td><a href="/update-guide" class="btn btn-dark">Edit</a></td>
+                    <td><a href="/guides/{{guide_ID}}" class="btn btn-dark">Edit</a></td>
                 </tr>
                 {{/each}}
             </tbody>
