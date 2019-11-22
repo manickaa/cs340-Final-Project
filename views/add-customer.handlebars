@@ -1,6 +1,6 @@
   <div id = "customer-page">
     <div class="form">
-        <form id="add-customer" action="/customer" method="POST">
+        <form id="add-customer" action="/add-customer" method="POST">
                 <div class="form-group row">
                         <label for="formGroupExampleInput" class="col-2 col-form-label">First Name:</label>
                         <div class="col-6">
@@ -52,7 +52,7 @@
                 <div class="form-group row">
                         <label for="example-tel-input" class="col-2 col-form-label">Phone Number</label>
                         <div class="col-6">
-                        <input class="form-control" type="tel" name="phone_number" pattern="^\d{4}-\d{3}-\d{4}$" placeholder="xxxx-xxx-xxxx" required>
+                        <input class="form-control" type="tel" name="phone_number" pattern="^\d{3}-\d{3}-\d{4}$" placeholder="xxx-xxx-xxxx" required>
                         </div>
                 </div>
                 <div class="form-group row">
@@ -64,7 +64,7 @@
                 <div class="form-group row">
                         <label for="formGroupExampleInput" class="col-2 col-form-label">Passport Number:</label>
                         <div class="col-6">
-                        <input type="text" class="form-control" name="passport_number" pattern="^[A-PR-WYa-pr-wy][1-9]\d\s?\d{4}[1-9]$"placeholder="Eg:P2309876" required>
+                        <input type="text" class="form-control" name="passport_number" placeholder="Eg:P2309876" required>
                         </div>
                 </div>
                 <div class="form-group row">
