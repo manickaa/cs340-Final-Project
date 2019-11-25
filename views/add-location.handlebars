@@ -15,6 +15,18 @@
                         <input type="text" class="form-control" id="location_country" name="country" required>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Price Per Adult</label>
+                    <div class="col-6">
+                        <input type="number" step=".01" class="form-control" id="price_adult" name="price_adult" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Price Per Child</label>
+                    <div class="col-6">
+                        <input type="number" step=".01" class="form-control" id="price_child" name="price_child" required>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-dark" id="add_new_location">Add</button>
                 <a href="/locations" class="btn btn-dark" id="submitInfo">Return to Manage Locations</a>
             </fieldset>

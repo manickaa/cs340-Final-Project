@@ -6,6 +6,7 @@
                 <div class="form-group row">
                     <div class="col-6">
                         <select name="guide_filter" size="1" class="form-control" id="guide_filter">
+                            <option value="NULL"></option>
                             {{#each guide_display}}
                             <option value="{{guide_ID}}">{{guide_full_name}}</option>
                             {{/each}}

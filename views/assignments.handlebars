@@ -7,7 +7,7 @@
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
                     <div class="col-6">
                         <select name="booking_id" size="1" class="form-control" id="booking_id">
-                            <!--TO DO add blank space-->
+                            <option value="NULL"></option>
                             {{#each booking_display}}
                             <option value="{{booking_ID}}">{{booking_ID}}</option>
                             {{/each}}
@@ -18,7 +18,7 @@
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Location</label>
                     <div class="col-6">
                         <select name="location_filter" size="1" class="form-control" id="location_filter">
-                            <!--TO DO add blank space-->
+                            <option value="NULL"></option>
                             {{#each location_display}}
                             <option value="{{location_id}}">{{location_name}}</option>
                             {{/each}}
@@ -29,7 +29,7 @@
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Tour Guide</label>
                     <div class="col-6">
                         <select name="guide_filter" size="1" class="form-control" id="guide_name">
-                        <!--TO DO add blank space-->
+                            <option value="NULL"></option>
                             {{#each guide_display}}
                             <option value="{{guide_id}}">{{guide_full_name}}</option>
                             {{/each}}
@@ -72,7 +72,7 @@
                     <td>{{count_adults}}</td>
                     <td>{{count_kids}}</td>
                     <td><button type="button" class="btn btn-dark" onclick="deleteAssignment({{assignment_ID}})">Delete</button></td>
-                    <td><a href="/update-assignments" class="btn btn-dark">Edit</a></td>
+                    <td><a href="/assignments/{{assignment_ID}}" class="btn btn-dark">Edit</a></td>
                 </tr>
                 {{/each}}
             </tbody>
