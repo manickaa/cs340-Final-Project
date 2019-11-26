@@ -1,0 +1,71 @@
+<div class="admin-page">
+        <div class = "form">
+            <form id="search-booking" action="" method="">
+                <fieldset>
+                    <legend>Manage Bookings</legend>
+                    <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Customer ID</label>
+                        <div class="col-6">
+                            <input type="text" class="form-control" name="customer_ID" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Travel Location ID</label>
+                        <div class="col-6">
+                            <input type="text" class="form-control" name="travelLocation_ID" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Departure Date</label>
+                        <div class="col-6">
+                        <input type="date" class="form-control" name="date" placeholder="dd/mm/yyyy" required >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Arrival Date</label>
+                        <div class="col-6">
+                        <input type="date" class="form-control" name="date" placeholder="dd/mm/yyyy" required>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-dark" onclick="searchBookings()">Search</button>
+                    <button type="button" class="btn btn-dark" id="submitInfo">
+                        <a href="/add-booking" id="link">Add New Booking</a>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <br />
+    
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">Booking ID#</th>
+                <th scope="col">Booking Date</th>
+                <th scope="col">Departure Date</th>
+                <th scope="col">Arrival Date</th>
+                <th scope="col">Number of Adults</th>
+                <th scope="col">Number of children</th>
+                <th scope="col">Travel Location ID #</th>
+                <th scope="col">Customer ID #</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+            </tr>   
+            </thead>
+            <tbody>
+                {{#each booking}}
+                <tr>
+                    <th scope="row">{{booking_ID}}</th>
+                    <td>{{booking_date}}</td>
+                    <td>{{departure_date}}</td>
+                    <td>{{arrival_date}}</td>
+                    <td>{{number_adults}}</td>
+                    <td>{{number_children}}</td>
+                    <td>{{travelLocation_ID}}</td>
+                    <td>{{customer_ID}}</td>
+                    <td><button type="button" onclick="deleteBooking({{booking_ID}})" class="btn btn-dark">Delete</button></td>
+                    <td><a href="/booking/{{booking_ID}}" class="btn btn-dark">Edit</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+</div> 
