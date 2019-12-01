@@ -24,7 +24,7 @@ CREATE TABLE `customers`
     `state` varchar(255) NOT NULL,
     `country` varchar(255) NOT NULL,
     `postal_code` varchar(5) NOT NULL,
-    `phone_number` varchar(10) NOT NULL,
+    `phone_number` varchar(12) NOT NULL,
     `email_id` varchar(255) NOT NULL,
     `passport_number` varchar(10) NOT NULL,
     `passport_countryofissue` varchar(255) NOT NULL,
