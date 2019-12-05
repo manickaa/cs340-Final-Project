@@ -1,8 +1,8 @@
 <div class="admin-page">
     <div class="form">
-        <form method="get" action="">
+        <form id="update-assignment" method="post" action="/assignments">
             <fieldset>
-                <legend>Update Assignment:</legend>
+                <legend>Manage Assignment #{{assignment.assignment_ID}}:</legend>
                 <div class="form-group row">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
                     <div class="col-6">
@@ -23,7 +23,7 @@
                         </select>
                     </div>
                 </div>
-                <button onclick="updateAssigment({{assignment.assignment_ID}})" class="btn btn-dark">Update</button>
+                <button onclick="updateAssignment({{assignment.assignment_ID}})" class="btn btn-dark">Update</button>
                 <script defer>selectBooking({{assignment.booking_ID}});</script>
                 <script defer>selectGuide({{assignment.guide_ID}});</script>
             </fieldset>
