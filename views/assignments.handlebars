@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-dark" id="submitInfo">Search</button>
-                <a href="/add-assignment" class="btn btn-dark" id="submitInfo">Add New Assignment</a>
+                <a href="/assignments/add-assignment" class="btn btn-dark" id="submitInfo">Add New Assignment</a>
 
             </fieldset>
         </form>
@@ -56,7 +56,6 @@
                     <th scope="col"># Adults</th>
                     <th scope="col"># Children</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -72,7 +71,6 @@
                     <td>{{count_adults}}</td>
                     <td>{{count_kids}}</td>
                     <td><button type="button" class="btn btn-dark" onclick="deleteAssignment({{assignment_ID}})">Delete</button></td>
-                    <td><a href="/assignments/{{assignment_ID}}" class="btn btn-dark">Edit</a></td>
                 </tr>
                 {{/each}}
             </tbody>

@@ -1,20 +1,17 @@
  <div class="admin-page">
     <div class="form">
-        <form method="get">
+        <form ud='filter_location' action='' method=''>
             <fieldset>
                 <legend>Manage Locations</legend>
                 <div class="form-group row">
+                    <label class="col-2 col-form-label">Search Country</label>
                     <div class="col-6">
-                        <select name="location_filter" size="1" class="form-control" id="location_filter">
-                            <option value="NULL"></option>
-                            {{#each location_display}}
-                            <option value="{{location_id}}">{{location_name}}</option>
-                            {{/each}}
-                        </select>
+                        <input class="form-control" id='country_search_string' type='text' name='country_search_string' value=''>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark" value="filter" name="search_location" id="search_location" onclick="filterLocation()">Search</button>
-                <a href="/add-location" class="btn btn-dark" id="submitInfo">Add New Location</a>
+                <input type="button" class="btn btn-dark" value="Search" onclick="searchLocationByCountry()">
+                <a href="/locations" class="btn btn-dark" id="submitInfo">Clear</a>
+                <a href="/locations/add-location" class="btn btn-dark" id="submitInfo">Add New Location</a>
             </fieldset>
         </form>
     </div>
@@ -25,10 +22,13 @@
                     <th scope="col">Location ID#</th>
                     <th scope="col">City</th>
                     <th scope="col">Country</th>
+                    <th scope="col">Price Per Adult</th>
+                    <th scope="col">Price Per Child</th>
                     <th scope="col"># Bookings</th>
                     <th scope="col"># Tour Guides</th>
                     <th scope="col"># Adults + Kids</th>
                     <th scope="col">Average Review</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -37,10 +37,13 @@
                     <th scope="row">{{location_ID}}</th>
                     <td>{{city}}</td>
                     <td>{{country}}</td>
+                    <td>{{price_adult}}</td>
+                    <td>{{price_child}}</td>
                     <td>{{count_bookings}}</td>
                     <td>{{count_guides}}</td>
                     <td>{{adults_kids}}</td>
                     <td>{{ave_review}}</td>
+                    <td><a href="/locations/{{location_ID}}" class="btn btn-dark">Edit</a></td>
                 </tr>
                 {{/each}}
             </tbody>

@@ -1,0 +1,22 @@
+<div class="admin-page">
+    <div class="form">
+        <form id="update-location" action="/locations" method="post">
+            <fieldset>
+                <legend>Update Prices for {{location.city}}, {{location.country}}:</legend>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Price Per Adult</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="price_adult" id="price_adult" value="{{location.price_adult}}" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Price Per Child</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="price_child" id="price_child" value="{{location.price_child}}" required>
+                    </div>
+                </div>
+                <button onclick="updateLocation({{location.location_ID}})" class="btn btn-dark">Update</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
