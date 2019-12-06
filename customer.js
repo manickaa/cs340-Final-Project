@@ -84,7 +84,7 @@ module.exports = function () {
       }
 
     /************** routes for customer entity ********************/
-    app.get('/customer', function (req, res, next) {
+    app.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["filters.js"];
@@ -99,7 +99,7 @@ module.exports = function () {
         }
     });
     
-    app.get('/customer/:id', function(req, res) {
+    app.get('/:id', function(req, res) {
       var callbackCount = 0;
       var context = {};
       context.jsscripts = ["update.js"];
@@ -113,7 +113,7 @@ module.exports = function () {
       }
     });
     
-    app.put('/customer/:id', function(req, res) {
+    app.put('/:id', function(req, res) {
       var mysql = req.app.get('mysql');
       var sql = "UPDATE customers SET first_name = ?, last_name = ?, street_no = ?, " +
                 "city = ?, state = ?, country = ?, phone_number = ?, email_id = ? " +
@@ -130,7 +130,7 @@ module.exports = function () {
       });
     });
     
-    app.get('/customer/filter/:id', function(req, res){
+    app.get('/filter/:id', function(req, res){
             var callbackCount = 0;
             var context = {};
             var mysql = req.app.get('mysql');
@@ -165,7 +165,7 @@ module.exports = function () {
     });
     
     app.get('/add-customer', function (req, res) {
-        res.render('add-customer.handlebars')
+        res.render('add-customer')
     });
 	
 	return app;
