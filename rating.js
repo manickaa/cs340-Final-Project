@@ -72,7 +72,7 @@ module.exports = function () {
 
     /************** routes for rating entity ********************/
 
-    app.get('/rating', function (req, res, next) {
+    app.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["filters.js"];
@@ -85,7 +85,7 @@ module.exports = function () {
             }
         }
     });
-    app.get('/rating/filterRating/:id', function(req, res){
+    app.get('/filterRating/:id', function(req, res){
             var callbackCount = 0;
             var context = {};
             var mysql = req.app.get('mysql');
