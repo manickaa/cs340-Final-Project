@@ -165,7 +165,7 @@ module.exports = function () {
     });
     
     app.get('/add-customer', function (req, res) {
-        res.render('add-customer')
+        res.render('add-customer');
     });
 	
 	return app;
