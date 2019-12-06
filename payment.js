@@ -69,7 +69,7 @@ module.exports = function () {
     
     /************** routes for payment entity******************/
     
-    app.get('/payment', function(req, res, next){
+    app.get('/', function(req, res, next){
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["deletePayment.js", "filters.js"];
@@ -83,7 +83,7 @@ module.exports = function () {
           }
         }
       });
-      app.get('/payment/filter/:id', function(req, res){
+      app.get('/filter/:id', function(req, res){
               var callbackCount = 0;
               var context = {};
               var mysql = req.app.get('mysql');
@@ -97,7 +97,7 @@ module.exports = function () {
       
               }
       });
-      app.delete('/payment/:id', function (req, res) {
+      app.delete('/:id', function (req, res) {
           var mysql = req.app.get('mysql');
           var sql = "DELETE FROM payment WHERE payment_ID = ?";
           var inserts = [req.params.id];
