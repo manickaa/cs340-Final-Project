@@ -81,7 +81,7 @@ module.exports = function () {
 
     /************** routes for booking entity **********************/
 
-    app.get('/booking', function (req, res, next) {
+    app.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["deleteBooking.js", "filters.js"];
@@ -96,7 +96,7 @@ module.exports = function () {
         }
     });
 
-    app.delete('/booking/:id', function (req, res) {
+    app.delete('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM bookings WHERE booking_ID = ?";
         var inserts = [req.params.id];
@@ -112,7 +112,7 @@ module.exports = function () {
         });
     });
     
-    app.get('/booking/filter/:id', function(req, res){
+    app.get('/filter/:id', function(req, res){
             var callbackCount = 0;
             var context = {};
             var mysql = req.app.get('mysql');
