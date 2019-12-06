@@ -1,0 +1,53 @@
+<div class="admin-page">
+    <div class = "form">
+        <form method="get">
+            <fieldset>
+                <legend>Manage Payment</legend>
+                <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
+
+                        <div class="col-6">
+                            <select name="booking_id" size="1" class="form-control" id="booking_id">
+                            <option value="NULL"></option>
+                            {{#each booking_display}}
+                            <option value="{{booking_ID}}">{{booking_ID}}</option>
+                            {{/each}}
+                            </select>
+                        </div>
+                </div>
+                <input type="button" value = "Filter" onclick = "filterPaymentByBooking()" class = "btn btn-dark">
+                <a href="/payment" class="btn btn-dark" id="submitInfo">Clear</a>
+                <button type="button" class="btn btn-dark" id="submitInfo">
+                    <a href="/add-payment" id="link">Add Payment</a>
+                </button>
+            </fieldset>
+        </form>
+    </div>
+    <br />
+    <div id="customer-page">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="col">Payment ID#</th>
+            <th scope="col">Booking ID#</th>
+            <th scope="col">Payment Amount</th>
+            <th scope="col">Payment Date</th>
+            <th scope="col">Payment Description</th>
+            <th scope="col">Delete</th>
+        </tr>   
+        </thead>
+        <tbody>
+            {{#each payment}}
+            <tr>
+                <th scope="row">{{payment_ID}}</th>
+                <td>{{booking_ID}}</td>
+                <td>{{payment_amount}}</td>
+                <td>{{payment_date}}</td>
+                <td>{{payment_description}}</td>
+                <td><button onclick="deletePayment({{payment_ID}})" class="btn btn-dark">Delete</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    </div>
+</div>    

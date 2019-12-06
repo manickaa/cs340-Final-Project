@@ -1,0 +1,53 @@
+<div class="admin-page">
+    <div class = "form">
+        <form id="add-rating" action"/rating" method="post">
+            <fieldset>
+                <legend>Add Ratings</legend>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Customer ID</label>
+                    <div class="col-6">
+                        <select name="customer_name" size="1" class="form-control" id="customer_name">
+                        <option value="NULL"></option>
+                        {{#each customer_display}}
+                        <option value="{{customer_ID}}">{{customer_name}}</option>
+                        {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Location</label>
+                        <div class="col-6">
+                            <select name="city_name" size="1" class="form-control" id="city_name">
+                            <option value="NULL"></option>
+                            {{#each city_display}}
+                            <option value="{{travelLocation_ID}}">{{city}}</option>
+                            {{/each}}
+                            </select>
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Rating</label>
+                        <div class="col-6">
+                            <select id="select_rating" size="1" class="form-control" name="select_rating">
+                                <option value="blank"></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Review</label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="review" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-dark" id="submitInfo">
+                    Add
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</div>

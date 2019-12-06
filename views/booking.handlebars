@@ -1,0 +1,58 @@
+<div class="admin-page">
+        <div class = "form">
+            <form id="search-booking" action="" method="">
+                <fieldset>
+                    <legend>Manage Bookings</legend>
+                    <div class="form-group row">
+                        <label for="formGroupExampleInput" class="col-2 col-form-label">Customer Name</label>
+                        <div class="col-6">
+                            <select name="customer_name" size="1" class="form-control" id="customer_name">
+                            <option value="NULL"></option>
+                            {{#each customer_display}}
+                            <option value="{{customer_ID}}">{{customer_name}}</option>
+                            {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <input type="button" value = "Filter" onclick = "filterBooking()" class = "btn btn-dark">	
+		    <a href="/booking" class="btn btn-dark" id="submitInfo">Clear</a>	
+                    <button type="button" class="btn btn-dark" id="submitInfo">
+                        <a href="/add-booking" id="link">Add New Booking</a>
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <br />
+        <div id="customer-page"> 
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">Booking ID#</th>
+                <th scope="col">Booking Date</th>
+                <th scope="col">Departure Date</th>
+                <th scope="col">Arrival Date</th>
+                <th scope="col">Number of Adults</th>
+                <th scope="col">Number of children</th>
+                <th scope="col">Travel Location ID #</th>
+                <th scope="col">Customer ID #</th>
+                <th scope="col">Delete</th>
+            </tr>   
+            </thead>
+            <tbody>
+                {{#each booking}}
+                <tr>
+                    <th scope="row">{{booking_ID}}</th>
+                    <td>{{booking_date}}</td>
+                    <td>{{departure_date}}</td>
+                    <td>{{arrival_date}}</td>
+                    <td>{{number_adults}}</td>
+                    <td>{{number_children}}</td>
+                    <td>{{travelLocation_ID}}</td>
+                    <td>{{customer_ID}}</td>
+                    <td><button type="button" onclick="deleteBooking({{booking_ID}})" class="btn btn-dark">Delete</button></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        </div>
+</div> 
