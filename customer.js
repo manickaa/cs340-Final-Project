@@ -99,6 +99,29 @@ module.exports = function () {
         }
     });
     
+    app.get('/add-customer', function (req, res) {
+        res.render('add-customer');
+    });	
+	
+    app.post('/add-customer', function(req, res, next) {
+      console.log(req.body)
+      var mysql = req.app.get('mysql');
+      var sql = "INSERT INTO customers (first_name, last_name, middle_name, " +
+                "street_no, city, state, country, postal_code, phone_number, email_id, " +
+                "passport_number, passport_countryofissue, passport_expirydate) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      var inserts = [req.body.first_name, req.body.last_name, req.body.middle_name, req.body.street_no, req.body.city, req.body.state, req.body.country, req.body.postal_code, req.body.phone_number, req.body.email_id, req.body.passport_number, req.body.passport_countryofissue, req.body.passport_expirydate];
+      sql = mysql.pool.query(sql,inserts,function(err, result, fields){
+          if(err){
+              console.log(JSON.stringify(err))
+              res.write(JSON.stringify(err));
+              res.end();
+          }else{
+              res.redirect('/customer');
+          }
+      });
+    });
+    
     app.get('/:id', function(req, res) {
       var callbackCount = 0;
       var context = {};
@@ -143,29 +166,6 @@ module.exports = function () {
                 }
     
             }
-    });
-    
-    app.post('/add-customer', function(req, res, next) {
-      console.log(req.body)
-      var mysql = req.app.get('mysql');
-      var sql = "INSERT INTO customers (first_name, last_name, middle_name, " +
-                "street_no, city, state, country, postal_code, phone_number, email_id, " +
-                "passport_number, passport_countryofissue, passport_expirydate) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-      var inserts = [req.body.first_name, req.body.last_name, req.body.middle_name, req.body.street_no, req.body.city, req.body.state, req.body.country, req.body.postal_code, req.body.phone_number, req.body.email_id, req.body.passport_number, req.body.passport_countryofissue, req.body.passport_expirydate];
-      sql = mysql.pool.query(sql,inserts,function(err, result, fields){
-          if(err){
-              console.log(JSON.stringify(err))
-              res.write(JSON.stringify(err));
-              res.end();
-          }else{
-              res.redirect('/customer');
-          }
-      });
-    });
-    
-    app.get('/add-customer', function (req, res) {
-        res.render('add-customer');
     });
 	
 	return app;
