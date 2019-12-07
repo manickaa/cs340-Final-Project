@@ -60,7 +60,7 @@ module.exports = function () {
     app.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["update.js", "filters.js", "selectors.js"];
+        context.jsscripts = ["deleteGuide.js","update.js", "filters.js", "selectors.js"];
         var mysql = req.app.get('mysql');
         getGuides(res, mysql, context, complete);
         function complete() {
