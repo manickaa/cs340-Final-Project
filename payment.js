@@ -133,8 +133,8 @@ module.exports = function () {
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(); 
         var sql = "INSERT INTO payment(booking_ID, payment_amount, payment_date, " +
-                "payment_description) VALUES(?, (SELECT ((t.amount_perAdult*b.number_adults) " +
-                "+ (t.amount_perChild*b.number_children) * (DATEDIFF(b.arrival_date, b.departure_date))) " +
+                "payment_description) VALUES(?, (SELECT (((t.amount_perAdult*b.number_adults) " +
+                "+ (t.amount_perChild*b.number_children)) * (DATEDIFF(b.arrival_date, b.departure_date))) " +
                 "AS payment_amount FROM bookings b INNER JOIN travel_location t ON b.travelLocation_ID " +
                 "= t.travelLocation_ID WHERE booking_ID = ?),?,?);";
         var inserts = [req.body.booking, req.body.booking, date, req.body.payment_description];

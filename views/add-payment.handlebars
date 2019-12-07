@@ -7,6 +7,7 @@
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
                     <div class="col-6">
                        <select id="booking" name="booking" size="1" class="form-control" required>
+                            <option selected="" disabled="">Select BookingID</option>
                             {{#each booking_display}}
                             <option value="{{booking_ID}}">{{booking_ID}}</option>
                             {{/each}}

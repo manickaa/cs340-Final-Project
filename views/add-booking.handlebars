@@ -2,11 +2,12 @@
     <div class = "form">
         <form id="add-booking" action="/add-booking" method="post">
             <fieldset>
-                <legend>Add Bookings</legend>
+                <legend>Add New Booking</legend>
                 <div class="form-group row">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Customer Name</label>
                     <div class="col-6">
                         <select name="customer_name" size="1" class="form-control" id="customer_name">
+                            <option selected="" disabled="">Select customer</option>
                             {{#each customer_display}}
                             <option value="{{customer_ID}}">{{customer_name}}</option>
                             {{/each}}
