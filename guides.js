@@ -2,8 +2,7 @@ module.exports = function () {
     var express = require('express');
     var app = express.Router();
 
-    //guide related functions
-
+    //gets guide information for main guide page table display
     function getGuides(res, mysql, context, complete) {
         var sql_query = "SELECT tour_guide.tourGuide_ID as guide_ID, tour_guide.first_Name as first_name, tour_guide.last_Name as last_name, " +
                         "COUNT(assignment.tourGuide_travelLocation) AS count_assignments, " +
@@ -23,6 +22,7 @@ module.exports = function () {
             complete();
         });
     }
+    //function gets guide first and last name to populate update form
     function getGuideUpdate(res, mysql, context, id, complete) {
         var sql = "SELECT tourGUide_ID AS guide_ID, first_Name AS first_name, last_Name AS last_name FROM tour_guide WHERE tourGuide_ID = ?";
         var inserts = [id];
@@ -35,7 +35,7 @@ module.exports = function () {
             complete();
         });
     }
-
+    //searches for guides with first name similar to user input
     function getGuideWithNameLike(req, res, mysql, context, complete) {
         var query = "SELECT tour_guide.tourGuide_ID as guide_ID, tour_guide.first_Name as first_name, tour_guide.last_Name as last_name, " +
                 "COUNT(assignment.tourGuide_travelLocation) AS count_assignments, " +
@@ -56,7 +56,7 @@ module.exports = function () {
         });
     }
 
-    //routes for guide pages
+    //main guide page
     app.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
@@ -73,6 +73,7 @@ module.exports = function () {
     app.post('/', function (req, res) {
         res.render('guides');
     });
+    //adds new guide to database based on user input
     app.post('/add-guide', function (req, res, next) {
         console.log(req.body)
         var mysql = req.app.get('mysql');
@@ -91,6 +92,7 @@ module.exports = function () {
     app.get('/add-guide', function (req, res) {
         res.render('add-guide');
     });
+    //gets & displays guide first/last name to user for update
     app.get('/:id', function (req, res) {
         callbackCount = 0;
         var context = {};
@@ -104,6 +106,7 @@ module.exports = function () {
             }
         }
     });
+    //updates guide first/last name of current guide based on user input
     app.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
         var sql = "UPDATE tour_guide SET first_Name=?, last_Name=? WHERE tourGuide_ID=?";
@@ -119,6 +122,7 @@ module.exports = function () {
             }
         });
     });
+    //implements search of guide by first name
     app.get('/search/:s', function (req, res) {
         var callbackCount = 0;
         var context = {};

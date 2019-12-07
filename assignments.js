@@ -2,7 +2,7 @@ module.exports = function () {
     var express = require('express');
     var app = express.Router();
 
-    //assignment related functions
+    //gets locations & display in dropdown
     function getLocationDisplay(res, mysql, context, complete) {
         mysql.pool.query("SELECT travel_location.travelLocation_ID as location_ID, " +
                         "CONCAT(travel_location.city, ', ', travel_location.country) AS location_name " +
@@ -16,6 +16,7 @@ module.exports = function () {
                 complete();
             });
     }
+    //gets guide names & display in dropdown
     function getGuideDisplay(res, mysql, context, complete) {
         mysql.pool.query("SELECT tour_guide.tourGuide_ID as guide_ID, CONCAT(tour_guide.first_name, ' ', tour_guide.last_name) as guide_full_name FROM tour_guide ORDER BY guide_full_name",
             function (error, results, fields) {
@@ -27,6 +28,7 @@ module.exports = function () {
                 complete();
             });
     }
+    //gets assigment information to display in table on main assignment page
     function getAssignments(res, mysql, context, complete) {
         var sql_query = "SELECT assignment.tourGuide_travelLocation AS assignment_ID, assignment.booking_ID AS booking_ID, " +
                         "CONCAT(tour_guide.first_name, ' ', tour_guide.last_name) AS guide, " +
@@ -54,7 +56,7 @@ module.exports = function () {
             complete();
         });
     }   
-
+    //gets booking ID numbers for dropdown 
     function getBookingID(res, mysql, context, complete) {
         mysql.pool.query("SELECT bookings.booking_ID AS booking_ID FROM bookings " +
                         "ORDER BY bookings.booking_ID",
@@ -68,7 +70,7 @@ module.exports = function () {
             });
     }
 
-    //routes for assigment pages
+    //main assignment page
     app.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
@@ -88,6 +90,7 @@ module.exports = function () {
     app.post('/', function (req, res) {
         res.render('assignments');
     });
+    //adds assignment to database
     app.post('/add-assignment', function (req, res, next) {
         console.log(req.body)
         var mysql = req.app.get('mysql');
@@ -104,6 +107,7 @@ module.exports = function () {
             }
         });
     });
+    //displays add assignment page
     app.get('/add-assignment', function (req, res) {
         var callbackCount = 0;
         var context = {};
@@ -117,6 +121,7 @@ module.exports = function () {
             }
         }
     });
+    //deletes assignment of specified ID
     app.delete('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM assignment WHERE tourGuide_travelLocation = ?";

@@ -2,7 +2,7 @@ module.exports = function () {
     var express = require('express');
     var app = express.Router();
 
-    //location related functions
+    //gets locations for dropdown display
     function getLocationDisplay(res, mysql, context, complete) {
         mysql.pool.query("SELECT travel_location.travelLocation_ID as location_ID, " +
                         "CONCAT(travel_location.city, ', ', travel_location.country) AS location_name " +
@@ -16,18 +16,7 @@ module.exports = function () {
                 complete();
             });
     }
-    function getCountry(res, mysql, context, complete) {
-        mysql.pool.query("SELECT travel_location.travelLocation_ID as location_ID, " +
-                        "travel_location.country AS country FROM travel_location",
-            function (error, results, fields) {
-                if (error) {
-                    res.write(JSON.stringify(error));
-                    res.end();
-                }
-                context.location_display = results;
-                complete();
-            });
-    }
+    //gets location information for main table display
     function getLocation(res, mysql, context, complete) {
         var sql_query = "SELECT travel_location.travelLocation_ID AS location_ID, travel_location.city AS city, travel_location.country as country, " +
                         "FORMAT(travel_location.amount_perAdult, 2) AS price_adult, FORMAT(travel_location.amount_perChild,2) AS price_child, " +
@@ -53,6 +42,7 @@ module.exports = function () {
             complete();
         });
     }
+    //gets information on specific location to dispaly for update
     function getLocationUpdate(res, mysql, context, id, complete) {
         var sql = "SELECT travel_location.travelLocation_ID AS location_ID, travel_location.city AS city, travel_location.country as country, " +
                     "travel_location.amount_perAdult AS price_adult, travel_location.amount_perChild AS price_child " +
@@ -67,6 +57,7 @@ module.exports = function () {
             complete();
         });
     }
+    //searches database for location based on user input by country
     function getLocationsByCountry(req, res, mysql, context, complete) {
         var query = "SELECT travel_location.travelLocation_ID AS location_ID, travel_location.city AS city, travel_location.country as country, " +
                 "FORMAT(travel_location.amount_perAdult, 2) AS price_adult, FORMAT(travel_location.amount_perChild,2) AS price_child, " +
@@ -93,7 +84,7 @@ module.exports = function () {
             complete();
         });
     }
-    //routes for location pages
+    //main location page
     app.get('/', function (req, res) {
         var callbackCount = 0;
         var context = {};
@@ -111,6 +102,7 @@ module.exports = function () {
     app.post('/', function (req, res) {
         res.render('locations');
     });
+    //adds new location into database
     app.post('/add-location', function (req, res, next) {
         console.log(req.body)
         var mysql = req.app.get('mysql');
