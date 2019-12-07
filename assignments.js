@@ -54,19 +54,7 @@ module.exports = function () {
             complete();
         });
     }   
-    function getAssignmentUpdate(res, mysql, context, id, complete) {
-        var sql = "SELECT tourGuide_travelLocation AS assignment_ID, booking_ID, travelLocation_ID AS location_ID, tourGuide_ID as guide_ID " +
-                    "FROM assignment WHERE tourGuide_travelLocation = ?";
-        var inserts = [id];
-        mysql.pool.query(sql, inserts, function (error, results, fields) {
-            if (error) {
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.assignment = results[0];
-            complete();
-        });
-    }
+
     function getBookingID(res, mysql, context, complete) {
         mysql.pool.query("SELECT bookings.booking_ID AS booking_ID FROM bookings " +
                         "ORDER BY bookings.booking_ID",
