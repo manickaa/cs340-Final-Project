@@ -1,6 +1,6 @@
 <div class="admin-page">
     <div class = "form">
-        <form id="add-booking" action="/booking/add-booking" method="post">
+        <form id="add-booking" action="/booking/add-booking" method="post" onsubmit = "return checkForm(this);">
             <fieldset>
                 <legend>Add New Booking</legend>
                 <div class="form-group row">
@@ -27,13 +27,13 @@
                 <div class="form-group row">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Departure Date</label>
                     <div class="col-6">
-                    <input type="date" class="form-control" name="departure_date" placeholder="24/10/2019" required >
+                    <input type="date" class="form-control" id="departure_date" name="departure_date" placeholder="24/10/2019" required >
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Arrival Date</label>
                     <div class="col-6">
-                    <input type="date" class="form-control" name="arrival_date" placeholder="29/10/2019" required>
+                    <input type="date" class="form-control" id="arrival_date" name="arrival_date" placeholder="29/10/2019" required>
                     </div>
                 </div>
                 <div class="form-group row">
