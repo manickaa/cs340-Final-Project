@@ -24,7 +24,8 @@
                     <th scope="col">Last Name</th>
                     <th scope="col"># Assignments</th>
                     <th scope="col"># Locations</th>
-                    <th scope="col"></th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +37,7 @@
                     <td>{{count_assignments}}</td>
                     <td>{{count_locations}}</td>
                     <td><a href="/guides/{{guide_ID}}" class="btn btn-dark">Edit</a></td>
+                    <td><button type="button" onclick="deleteGuide({{guide_ID}})" class="btn btn-dark">Delete</button></td>
                 </tr>
                 {{/each}}
             </tbody>
