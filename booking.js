@@ -130,6 +130,7 @@ module.exports = function () {
     app.get('/add-booking', function (req, res) {
        var callbackCount = 0;
         var context = {};
+	context.jsscripts = ["checkForm.js"];
         var mysql = req.app.get('mysql');
         getCustomerName(res, mysql, context, complete); 
         getCity(res, mysql, context, complete);  
