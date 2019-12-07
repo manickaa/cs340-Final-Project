@@ -7,7 +7,7 @@
                 <label for="formGroupExampleInput" class="col-2 col-form-label">Email ID</label>
                     <div class="col-6">
                         <select name="email_id" size="1" class="form-control" id="email_id">
-             
+             		    <option selected="" disabled="">Select email ID</option>	
                             {{#each email_display}}
                             <option value="{{customer_ID}}">{{email_id}}</option>
                             {{/each}}
