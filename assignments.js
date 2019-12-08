@@ -85,6 +85,20 @@ module.exports = function () {
                 complete();
             });
     }
+    //gets bookingID that has not been assigned yet
+    function getUnassignedBookingID(res, mysql, context, complete) {
+        mysql.pool.query("SELECT bookings.booking_ID FROM bookings WHERE bookings.booking_ID " +
+                         "NOT IN (SELECT assignment.booking_ID FROM assignment) " +
+                         "ORDER BY bookings.booking_ID",
+                function (error, results, fields) {
+                if (error) {
+                    res.write(JSON.stringify(error));
+                    res.end();
+                }
+                context.booking_display = results;
+                complete();
+            });
+    }
 
     //main assignment page
     app.get('/', function (req, res) {
@@ -128,7 +142,7 @@ module.exports = function () {
         var callbackCount = 0;
         var context = {};
         var mysql = req.app.get('mysql');
-        getBookingID(res, mysql, context, complete);
+        getUnassignedBookingID(res, mysql, context, complete);
         getGuideDisplay(res, mysql, context, complete);
         function complete() {
             callbackCount++;
