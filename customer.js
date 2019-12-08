@@ -4,7 +4,8 @@ module.exports = function () {
 
     /************** functions for customer entity******************/
     
-    function getEmail(res, mysql, context, complete) {
+   //function to get the email ids of all the customers in the dropdown for filter 
+   function getEmail(res, mysql, context, complete) {
         mysql.pool.query("SELECT customer_ID, email_id FROM customers ORDER BY customer_ID",
             function (error, results, fields) {
                 if (error) {
@@ -15,7 +16,7 @@ module.exports = function () {
                 complete();
             });
     }
-
+    //function to display customers in the table
     function getCustomer(res, mysql, context, complete){
         var sql_query = "SELECT customers.customer_ID as customer_ID, customers.first_name " +
                        "as first_name, customers.middle_name as middle_name, " +
@@ -39,7 +40,7 @@ module.exports = function () {
             complete();
         });
       }
-      
+      //function to get the customer data from :id for update form
       function getCustomerUpdate(res, mysql, context, id, complete){
         var sql_query = "SELECT customer_ID as customer_ID,first_name as first_name, " +
                         "last_name as last_name, street_no as street_no, city as city, " +
@@ -58,7 +59,7 @@ module.exports = function () {
             complete();
         });
       }
-      
+      //function to get display customers in the table on filter 
       function getCustomerByEmail(res, mysql, context, id, complete){
           var query = "SELECT customers.customer_ID as customer_ID, customers.first_name " +
                        "as first_name, customers.middle_name as middle_name, " +
@@ -83,6 +84,8 @@ module.exports = function () {
       }
 
     /************** routes for customer entity ********************/
+	
+    //render customer page
     app.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
@@ -97,11 +100,13 @@ module.exports = function () {
             }
         }
     });
-    
+	
+    //render add-customer page
     app.get('/add-customer', function (req, res) {
         res.render('add-customer');
-    });	
+    });
 	
+    //adds customer to database	
     app.post('/add-customer', function(req, res, next) {
       console.log(req.body)
       var mysql = req.app.get('mysql');
@@ -121,6 +126,7 @@ module.exports = function () {
       });
     });
     
+    //render the update-customer page using :id	
     app.get('/:id', function(req, res) {
       var callbackCount = 0;
       var context = {};
@@ -134,7 +140,8 @@ module.exports = function () {
           }
       }
     });
-    
+	
+    //updates the customer with the specific :id
     app.put('/:id', function(req, res) {
       var mysql = req.app.get('mysql');
       var sql = "UPDATE customers SET first_name = ?, last_name = ?, street_no = ?, " +
@@ -151,7 +158,8 @@ module.exports = function () {
           }
       });
     });
-    
+	
+    //filter the customers using email 
     app.get('/filter/:id', function(req, res){
             var callbackCount = 0;
             var context = {};
