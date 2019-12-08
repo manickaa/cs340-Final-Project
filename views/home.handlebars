@@ -18,11 +18,12 @@
     <p id="description">Assignments</p>
     <p id="description_content">
         Search, edit, delete & add new assignments. New assignments require only the Booking Id and Tour Guide name. The location Id is take from
-        the booking information as the 3rd foreign key. Assignments manage the M:M relationship between Location and Tour Guide. 
+        the booking information as the 3rd foreign key. Assignments manage the M:M relationship between Location and Tour Guide. The guide for a 
+        given assignment can be set to NULL (no guide), but an assigments is always linked to a booking.
     </p>
     <p id="description">Tour Guides</p>
     <p id="description_content">
-        Search, edit & add new tour guides to the database. Tour Guides cannot be deleted from the database.
+        Search, edit & add new tour guides to the database. If a Tour Guide is deleted from the database, any associated assignments are also deleted.
     </p>
     <p id="description">Locations</p>
     <p id="description_content">
@@ -30,11 +31,11 @@
     </p>
     <p id="description">Ratings</p>
     <p id="description_content">
-        Search, edit, delete & add new locations to the database. Ratings must be associated with a customer and with a location, manageing the 
+        Search & add new ratings to the database. Ratings must be associated with a customer and with a location, manageing the 
         M:M relationship between the two. 
     </p>
     <p id="description">Payments</p>
     <p id="description_content">
-        Search, edit, delete & add new payments. Payments must be associated with a booking. 
+        Search, delete & add new payments. Payments must be associated with a booking. 
     </p>
 </div>
