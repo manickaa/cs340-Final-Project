@@ -3,7 +3,7 @@ module.exports = function () {
     var app = express.Router();
 
     /************** functions for rating entity******************/
-
+    //function to display rating in the table
     function getRating(res, mysql, context, complete){
         var sql_query = "SELECT ratings.rating_ID, ratings.travelLocation_ID, " +
                         "travel_location.city, ratings.customer_ID, " +
@@ -24,7 +24,7 @@ module.exports = function () {
             complete();
         });
     }
-
+    //function to filter ratings table using rating
     function getRatingByRating(res, mysql, context, id, complete){
         var query = "SELECT ratings.rating_ID, ratings.travelLocation_ID, travel_location.city, " +
                     "ratings.customer_ID, CONCAT(customers.first_name, ' ', customers.last_name) " +
@@ -43,7 +43,7 @@ module.exports = function () {
               complete();
           });
     }
-
+    //function to get the customer name in the dropdown for adding rating
     function getCustomerName(res, mysql, context, complete) {
         mysql.pool.query("SELECT customer_ID, CONCAT(first_name, ' ', last_name) " +
                         "AS customer_name FROM customers ORDER BY customer_ID",
@@ -56,7 +56,7 @@ module.exports = function () {
                 complete();
             });
     }
-
+    //function to get city in the dropdown for adding rating
     function getCity(res, mysql, context, complete) {
         mysql.pool.query("SELECT travelLocation_ID, city FROM travel_location " +
                         "ORDER BY travelLocation_ID",
@@ -71,7 +71,7 @@ module.exports = function () {
     }
 
     /************** routes for rating entity ********************/
-
+    //render rating page
     app.get('/', function (req, res, next) {
         var callbackCount = 0;
         var context = {};
@@ -85,6 +85,7 @@ module.exports = function () {
             }
         }
     });
+    //filter rating page
     app.get('/filterRating/:id', function(req, res){
             var callbackCount = 0;
             var context = {};
@@ -98,6 +99,7 @@ module.exports = function () {
     
             }
     });
+    //render add-rating page
     app.get('/add-rating', function(req, res, next){
       var callbackCount = 0;
       var context = {};
@@ -111,7 +113,7 @@ module.exports = function () {
         }
       }
     });
-    
+    //adds rating to the database
     app.post('/add-rating', function(req, res, next){
       console.log(req.body)
       var mysql = req.app.get('mysql');
