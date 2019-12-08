@@ -13,6 +13,7 @@
                         </select>
                     </div>
                 </div>
+		<p id="hidden_booking">Booking ID is unique for each assignment. Cannot be updated. Shown here for display purpose!</p>
 		<div class="hidden_input">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
                     <div class="col-6">
@@ -27,7 +28,7 @@
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Tour Guide</label>
                     <div class="col-6">
                         <select name="guide_display" size="1" class="form-control" id="guide-selector" required>
-                            <option value="NULL"></option>
+                            <option value="NULL">No guide</option>
                             {{#each guide_display}}
                             <option value="{{guide_ID}}">{{guide_full_name}}</option>
                             {{/each}}
