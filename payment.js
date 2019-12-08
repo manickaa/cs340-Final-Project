@@ -3,7 +3,7 @@ module.exports = function () {
     var app = express.Router();
 
     /************** functions for payment entity******************/
-
+    //function to display payments in the tables
     function getPayment(res, mysql, context, complete){
         var sql_query = "SELECT payment.payment_ID, payment.booking_ID, payment.payment_amount, " +
                         "DATE_FORMAT(payment.payment_date, '%m/%d/%Y') as payment_date, " + 
@@ -21,7 +21,7 @@ module.exports = function () {
             complete();
         });
     }
-
+    //function to get display booking ID on dropdown for filter
     function getPaymentBookingID(res, mysql, context, complete) {
         mysql.pool.query("SELECT payment.booking_ID AS booking_ID FROM payment " +
                         "ORDER BY payment.booking_ID",
@@ -34,7 +34,7 @@ module.exports = function () {
                 complete();
             });
     }
-
+    //function to display the payment in the table on filter based on booking
     function getPaymentByBookings(res, mysql, context, id, complete){
         var query = "SELECT payment.payment_ID, payment.booking_ID, payment.payment_amount, " +
                     "DATE_FORMAT(payment.payment_date, '%m/%d/%Y') as payment_date, " +
@@ -52,7 +52,7 @@ module.exports = function () {
               complete();
           });
     }
-
+    //function to get booking ID that has not been paid yet on the dropdown
     function getUnpaidBookingID(res, mysql, context, complete) {
         mysql.pool.query("SELECT bookings.booking_ID FROM bookings WHERE bookings.booking_ID " +
                          "NOT IN (SELECT payment.booking_ID FROM payment) " +
@@ -68,7 +68,7 @@ module.exports = function () {
     }
     
     /************** routes for payment entity******************/
-    
+    //renders payment page
     app.get('/', function(req, res, next){
         var callbackCount = 0;
         var context = {};
@@ -83,6 +83,7 @@ module.exports = function () {
           }
         }
       });
+      //renders payment page on filter
       app.get('/filter/:id', function(req, res){
               var callbackCount = 0;
               var context = {};
@@ -97,6 +98,7 @@ module.exports = function () {
       
               }
       });
+      //deletes the corresponding payment from database
       app.delete('/:id', function (req, res) {
           var mysql = req.app.get('mysql');
           var sql = "DELETE FROM payment WHERE payment_ID = ?";
@@ -112,7 +114,7 @@ module.exports = function () {
               }
           });
       });
-      
+      //renders add-payment page
       app.get('/add-payment', function (req, res) {
          var callbackCount = 0;
           var context = {};
@@ -125,7 +127,7 @@ module.exports = function () {
               }
           }
       });
-      
+      //adds the payment in the table
       app.post('/add-payment', function(req, res, next){
         console.log(req.body)
         console.log(req.body.booking)
