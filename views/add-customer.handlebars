@@ -48,7 +48,7 @@
                 <div class="form-group row">
                         <label for="formGroupExampleInput" class="col-2 col-form-label">Postal Code:</label>
                         <div class="col-6">
-                        <input type="text" class="form-control" name="postal_code" placeholder="Eg:98101" required>
+                        <input type="text" class="form-control" name="postal_code" pattern="^\d{5}$" placeholder="Eg:98101" required>
                         </div>
                 </div>
                 <div class="form-group row">
@@ -60,7 +60,7 @@
                 <div class="form-group row">
                         <label for="exampleInputEmail1" class="col-2 col-form-label">Email ID</label>
                         <div class="col-6">
-                        <input type="email" class="form-control" name="email_id" placeholder="Eg:abcd@gmail.com" required>
+                        <input type="email" class="form-control" name="email_id" pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" placeholder="Eg:abcd@gmail.com" required>
                         </div>
                 </div>
                 <div class="form-group row">
