@@ -4,6 +4,7 @@ function selectGuide(id) {
 
 function selectBooking(id) {
     $("#booking-selector").val(id);
+    $("#hidden_display").val(id);
 }
 
 function selectLocation(id) {
