@@ -1,4 +1,4 @@
-function deletePayment(id){
+function deleteGuide(id){
     $.ajax({
         url: '/guides/' + id,
         type: 'DELETE',
