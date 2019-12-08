@@ -172,16 +172,9 @@ module.exports = function () {
     });
     app.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
-	console.log(req)
-	console.log(res)
-        var sql = "UPDATE assignment SET booking_ID=?, tourGuide_ID=?, " +
+	var sql = "UPDATE assignment SET booking_ID=?, tourGuide_ID=IF(?='NULL', NULL,?), " +
             "travelLocation_ID=(SELECT bookings.travelLocation_ID FROM bookings WHERE booking_ID=?) WHERE tourGuide_travelLocation=?";
-	if(req.body.guide_display == "NULL") {
-           var inserts = [req.body.hidden_display, NULL, req.body.hidden_display, req.params.id];
-        }
-        else {
-        var inserts = [req.body.hidden_display, req.body.guide_display, req.body.hidden_display, req.params.id];
-        }
+       var inserts = [req.body.hidden_display, req.body.guide_display, req.body.guide_display, req.body.hidden_display, req.params.id];
 	console.log(inserts);
         sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
             if (error) {
