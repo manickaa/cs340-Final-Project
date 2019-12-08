@@ -1,4 +1,4 @@
-<div class="admin-page"> 
+<div class="admin-page">
   <div class="form">
     <form id="filter_customer" action='' method=''>
         <fieldset>
@@ -7,7 +7,7 @@
                 <label for="formGroupExampleInput" class="col-2 col-form-label">Email ID</label>
                     <div class="col-6">
                         <select name="email_id" size="1" class="form-control" id="email_id">
-             		    <option selected="" disabled="">Select email ID</option>	
+                            <option selected="" disabled="">Select email ID</option>
                             {{#each email_display}}
                             <option value="{{customer_ID}}">{{email_id}}</option>
                             {{/each}}
@@ -15,12 +15,12 @@
                     </div>
             </div>
             <input type="button" value = "Filter" onclick = "filterCustomerBycustomerID()" class = "btn btn-dark">
-	    <a href="/customer" class="btn btn-dark" id="submitInfo">Clear</a>	
+            <a href="/customer" class="btn btn-dark" id="submitInfo">Clear</a>
             <a href="/customer/add-customer" class="btn btn-dark" id="submitInfo">Add New Customer</a>
 
         </fieldset>
     </form>
-  </div>   
+  </div>
   <div id="customer-page">
         <table class="table table-bordered">
             <thead>
@@ -33,10 +33,12 @@
                     <th scope="col">City</th>
                     <th scope="col">State</th>
                     <th scope="col">Country</th>
+                    <th scope="col">Postal Code</th>
                     <th scope="col">Phone number</th>
                     <th scope="col">Email</th>
-                    <th scope="col"># Bookings</th>
-                    <th scope="col"># Reviews</th>
+                    <th scope="col">Passport#</th>
+                    <th scope="col">Passport CountryOfIssue</th>
+
                     <th></th>
                 </tr>
             </thead>
@@ -51,12 +53,13 @@
                     <td>{{city}}</td>
                     <td>{{state}}</td>
                     <td>{{country}}</td>
+                    <td>{{postal_code}}</td>
                     <td>{{phone_number}}</td>
                     <td>{{email_id}}</td>
-                    <td>{{numberofbookings}}</td>
-                    <td>{{numberofreviews}}</td>
+                    <td>{{passport_number}}</td>
+                    <td>{{passport_countryofissue}}</td>
                     <td><a href="/customer/{{customer_ID}}" class="btn btn-dark">Edit</a></td>
-                </tr>
+		    </tr>
                 {{/each}}
             </tbody>
         </table>
