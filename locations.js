@@ -27,8 +27,7 @@ module.exports = function () {
                         "LEFT JOIN bookings ON travel_location.travelLocation_ID = bookings.travelLocation_ID " +
                         "LEFT JOIN assignment ON bookings.booking_ID = assignment.booking_ID " +
                         "LEFT JOIN tour_guide ON assignment.tourGuide_ID = tour_guide.tourGuide_ID " +
-                        "LEFT JOIN customers ON bookings.customer_ID = customers.customer_ID " +
-                        "LEFT JOIN ratings ON customers.customer_ID = ratings.customer_ID " +
+                        "LEFT JOIN ratings ON travel_location.travelLocation_ID = ratings.travelLocation_ID " +
                         "GROUP BY travel_location.travelLocation_ID " +
                         "ORDER BY travel_location.travelLocation_ID";
         mysql.pool.query(sql_query, function (err, result, fields) {

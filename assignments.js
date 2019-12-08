@@ -170,6 +170,7 @@ module.exports = function () {
             }
         }
     });
+    //updates assignemnt in database
     app.put('/:id', function (req, res) {
         var mysql = req.app.get('mysql');
 	var sql = "UPDATE assignment SET booking_ID=?, tourGuide_ID=IF(?='NULL', NULL,?), " +
@@ -187,7 +188,6 @@ module.exports = function () {
             }
         });
     });
-
-
+    
     return app;
 }();
