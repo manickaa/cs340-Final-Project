@@ -1,0 +1,32 @@
+<div class="admin-page">
+    <div class="form">
+        <form id="update-assignment" method="post" action="/assignments">
+            <fieldset>
+                <legend>Manage Assignment #{{assignment.assignment_ID}}:</legend>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
+                    <div class="col-6">
+                        <select name="assign_id" size="1" class="form-control" id="booking-selector" required>
+                            {{#each booking_display}}
+                            <option value="{{booking_ID}}">{{booking_ID}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Tour Guide</label>
+                    <div class="col-6">
+                        <select name="guide_name" size="1" class="form-control" id="guide-selector" required>
+                            {{#each guide_display}}
+                            <option value="{{guide_ID}}">{{guide_full_name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <button onclick="updateAssignment({{assignment.assignment_ID}})" class="btn btn-dark">Update</button>
+                <script defer>selectBooking({{assignment.booking_ID}});</script>
+                <script defer>selectGuide({{assignment.guide_ID}});</script>
+            </fieldset>
+        </form>
+    </div>
+</div>

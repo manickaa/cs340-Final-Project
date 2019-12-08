@@ -30,3 +30,14 @@ function updateCustomer(id){
         }
     })
 };
+
+function updateAssignment(id) {
+    $.ajax({
+        url: '/assignments/' + id,
+        type: 'PUT',
+        data: $('#update-assignment').serialize(),
+        success: function (result) {
+            window.location.replace("/assignments");
+        }
+    })
+};

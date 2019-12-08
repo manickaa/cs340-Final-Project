@@ -138,5 +138,40 @@ module.exports = function () {
         })
     })
 
+    //UPDATE ASSIGNMENT
+    app.get('/:id', function (req, res) {
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["update.js", "selectors.js", "filters.js"]
+        var mysql = req.app.get('mysql');
+        getAssignmentUpdate(res, mysql, context, req.params.id, complete);
+        getBookingID(res, mysql, context, complete);
+        getGuideDisplay(res, mysql, context, complete);
+        function complete() {
+            callbackCount++;
+            if (callbackCount >= 3) {
+                res.render('update-assignment', context);
+            }
+        }
+    });
+    app.put('/:id', function (req, res) {
+        var mysql = req.app.get('mysql');
+        var sql = "Update assignment SET booking_ID=?, tourGuide_ID=?, " +
+            "travelLocation_ID=(SELECT bookings.travelLocation_ID FROM bookings WHERE booking_ID=?) WHERE tourGuide_travelLocation=?";
+        var inserts = [req.body.booking, req.body.tour_guide, req.body.booking, req.params.id];
+        console.log(inserts);
+        sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+            if (error) {
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.status(200);
+                res.end();
+            }
+        });
+    });
+
+
     return app;
 }();
