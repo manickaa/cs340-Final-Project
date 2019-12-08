@@ -28,26 +28,16 @@ body, html {
 } 
 #customer-page {
 	padding-top: 3%;
-	padding-bottom: 9%;
+	padding-bottom: 3%;
 	padding-left: 2%;
 	padding-right:2%;
+	background-color: #21252985;
 }
 #admin-page {
 	padding-top: 3%;
 	padding-bottom: 15%;
 	padding-left: 2%;
 	padding-right:2%;
-}
-.sign-up {
-	padding-top : 20px;
-	padding-bottom: 20px;
-	padding-left: 20px;
-	padding-right: 20px;
-	border: 2pt;
-	border-style: groove;
-	border-color: grey;
-	width:30%;
-	background-color: grey;
 }
 #link {
 	color : white;
