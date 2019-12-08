@@ -55,7 +55,23 @@ module.exports = function () {
             console.log(context.assignments);
             complete();
         });
-    }   
+    }  
+    //gets the assignment information for update
+    function getAssignmentUpdate(res, mysql, context, id, complete){
+        var sql_query = "SELECT assignment.tourGuide_travelLocation AS assignment_ID, assignment.booking_ID as booking_ID, " +
+                        "assignment.tourGuide_ID as guide_ID FROM assignment WHERE tourGuide_travelLocation = ?";
+        var inserts = [id];
+        mysql.pool.query(sql_query, inserts, function(err, result, fields){
+            if(err){
+                console.log(err);
+                res.write(JSON.stringify(err));
+                res.end();
+            }
+            context.assignment = result[0];
+            console.log(context.assignment);
+            complete();
+        });
+      } 
     //gets booking ID numbers for dropdown 
     function getBookingID(res, mysql, context, complete) {
         mysql.pool.query("SELECT bookings.booking_ID AS booking_ID FROM bookings " +
