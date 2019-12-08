@@ -6,7 +6,17 @@
                 <div class="form-group row">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
                     <div class="col-6">
-                        <select name="assign_id" size="1" class="form-control" id="booking-selector" required>
+                        <select name="booking_display" size="1" class="form-control" id="booking-selector" disabled>
+                            {{#each booking_display}}
+                            <option value="{{booking_ID}}">{{booking_ID}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+		<div class="hidden_input">
+                    <label for="formGroupExampleInput" class="col-2 col-form-label">Booking ID</label>
+                    <div class="col-6">
+                        <select name="hidden_display" size="1" class="form-control" id="hidden_display">
                             {{#each booking_display}}
                             <option value="{{booking_ID}}">{{booking_ID}}</option>
                             {{/each}}
@@ -16,7 +26,8 @@
                 <div class="form-group row">
                     <label for="formGroupExampleInput" class="col-2 col-form-label">Tour Guide</label>
                     <div class="col-6">
-                        <select name="guide_name" size="1" class="form-control" id="guide-selector" required>
+                        <select name="guide_display" size="1" class="form-control" id="guide-selector" required>
+                            <option value="NULL"></option>
                             {{#each guide_display}}
                             <option value="{{guide_ID}}">{{guide_full_name}}</option>
                             {{/each}}
