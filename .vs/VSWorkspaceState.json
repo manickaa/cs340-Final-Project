@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
     "\\views"
   ],
-  "SelectedNode": "\\locations.js",
+  "SelectedNode": "\\public\\update.js",
   "PreviewInSolutionExplorer": false
 }
