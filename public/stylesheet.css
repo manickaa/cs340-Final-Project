@@ -85,3 +85,10 @@ th, td {
     padding-left: 5%;
     padding-right: 5%;
 }
+.hidden_input {
+        display:none;
+}
+#hidden_booking {
+    color: white;
+    font-size = 1rem;
+}
